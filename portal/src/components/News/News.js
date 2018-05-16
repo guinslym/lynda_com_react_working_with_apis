@@ -17,14 +17,12 @@ componentDidMount() {
   .then((response)=> {
     //When You receive a response do this; return it as JSON
     return response.json()
-  }).
-  then((data) =>{
+  }).then((data) =>{
     // Whatever is return
     this.setState({
       news:data.articles
     })
-  })
-  .catch((error)=>{
+  }).catch((error)=>{
     // if there is error
     console.log(error)
   })
@@ -33,14 +31,14 @@ componentDidMount() {
 
 renderItems(item){
   return this.state.news.map((item)=> (
-    <NewSingle key={item.id} item={item} />
+    <NewSingle key={item.url} item={item} />
   ));
 }
     render() {
         return (
-            <ul>
+            <div className="row">
               {this.renderItems()}
-            </ul>
+            </div>
         );
     }
 }
