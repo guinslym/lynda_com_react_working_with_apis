@@ -1,31 +1,46 @@
 import React, { Component } from 'react';
 import './App.css';
 import News from './News/News';
-import { concat, sortBy, map, sample , shuffle} from 'lodash'
-// import concat from 'lodash/concat';
+import Sidenews from './News/Sidenews';
 
 class App extends Component {
-  constructor(props){
-  	super(props);
-  	this.state = {
-      newsCategory : ['top-headlines?sources=bbc-news', 'top-headlines?country=de&category=business', 'top-headlines?q=trump', 'everything?q=apple&from=2018-05-15&to=2018-05-15&sortBy=popularity','everything?q=reactjs']
+  constructor(props) {
+    super(props);
+    this.state = {
+      news1: {
+        type: 'top-headlines',
+        query: 'sources=bbc-news'
+      },
+      news2: {
+        type: 'everything',
+        query: 'domains=techcrunch.com&language=en'
+      },
+      news3: {
+        type: 'everything',
+        query: 'domains=comicbookmovie.com&language=en'
+      }
     };
-
   }
-
-randomTopics(){
-  console.log(this.state.newsCategory);
-  const sh = shuffle(this.state.newsCategory);
-  return shuffle(this.state.newsCategory);
-}
 
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <h1 className="App-title">Welcome to News Feed API</h1>
-        </header>
-        <News topic={shuffle(this.state.newsCategory)[0]}/>
+      <div className="containwer-fluid">
+        <div className="navbar-fixed">
+          <nav>
+            <div className="nav-wrapper indigo lighten-4">
+              <a href="/" className="bran-logo center">My Feed</a>
+            </div>
+          </nav>
+        </div>
+        <div className="row">
+          <div className="col s8">
+            <News news={this.state.news1} />
+            <News news={this.state.news2} />
+          </div>
+          <div className="col s4">
+            <Sidenews news={this.state.news3}/>
+          </div>
+        </div>
       </div>
     );
   }
